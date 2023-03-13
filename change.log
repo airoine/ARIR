@@ -1,0 +1,6 @@
+2.0.0
+- Portage de la solution interne pour un commit GIT
+- ajout des connexions locale et ldap (SSO utilisé en interne)
+- ajout de la gestion des services et des utilisateurs en local
+- dépersonnalisation de l'interface
+- Mise à jour des dépendances
