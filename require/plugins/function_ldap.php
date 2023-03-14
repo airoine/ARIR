@@ -29,7 +29,7 @@ function ldap_test($ds){
 	}
 	return true;
 }
-//cn=adam.goomany,dmdName=Personnes,dc=gendarmerie,dc=defense,dc=gouv,dc=fr
+
 function cnx_user($rootdn,$rootpw){
 	$user="uid=".$rootdn.",".DNPERSONNESLDAP;
 	$pass=$rootpw;
