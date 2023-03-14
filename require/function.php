@@ -230,9 +230,10 @@ function envoi_mail($titre,$txt,$to,$cc){
 	if (MAILS){
 		// Formatage et envoi du message
 		$txt_html=format_mail_html($txt);
-		if (SEND_MAILS == "MAIL_SSO")
-			sso_mail($titre,$txt_html,$to,$cc);
-		elseif(SEND_MAILS == "MAIL_SRV"){
+		if (SEND_MAILS == "MAIL_SSO"){
+			require_once('require/plugins/SSO.php');
+			sso_mail($titre,$txt_html,$to,$cc);		
+		}elseif(SEND_MAILS == "MAIL_SRV"){
 
 			// Pour envoyer un mail HTML, l'en-tête Content-type doit être défini
 			$headers[] = 'MIME-Version: 1.0';
@@ -657,7 +658,6 @@ function format_mail_html($txt){
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Mail généré par l\'application ARIR <br><i> Application de Réservations d\'Inscriptions et de Ressources</i></span>
-                    <br><a href="mailto:erwan.goalou@gendarmerie.interieur.gouv.fr">Contacter le développeur</a>.
                   </td>
                 </tr>
                 <tr>
