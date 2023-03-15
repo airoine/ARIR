@@ -32,7 +32,7 @@ if (isset($_POST['dcnx']) && $_POST['dcnx'] == "dcnx"){
 }
 require_once('require/plugins/function_ldap.php');
 //version de l'application
-define('VERSION','2.0.0');
+define('VERSION','2.0.1');
 
 //Connexion à la base de données
 $bdd=dbconnect();
