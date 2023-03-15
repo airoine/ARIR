@@ -185,6 +185,8 @@ function redirection($reset=false){
  * 
  */
 function envoi_mails_dde_resa($id,$status=''){
+    if (!MAILS)
+        return false;
 	$info_mail=recup_mail($id);
 	if ($status == ''){
 		$txt_lbl=NAME.' - Demande de réservation de ressource : '.$info_mail['LBL_RESSOURCE'];
@@ -699,15 +701,25 @@ function recup_mail($id_demande){
 	$mail_unite_admin = $donnees['email'];
 	$mail_demandeur = '';
 	$mail_unite_demandeur = '';
-	//récupération du mail du demandeur
-	$info_user=ldap_info_user($donnees['nigend_demandeur']);
-	if (isset($info_user[0]['mail'][0]))
-		$mail_demandeur=$info_user[0]['mail'][0];
-	//récupération du mail unité de rattachement du demandeur
-	if (isset($info_user[0]['codeuniteservice'][0]))
-		$info_cu_demandeur=ldap_info_cu($info_user[0]['codeuniteservice'][0]);
-	if (isset($info_cu_demandeur[0]['mail'][0]))
-		$mail_unite_demandeur = $info_cu_demandeur[0]['mail'][0];	
+	if (AUTH == "LOCAL"){
+	    $sql="select u.mail user_mail, s.mail service_mail from users u,services s where u.codeUnite=s.codeUnite and nigend= :id_demandeur";
+	    $reponse=$bdd->prepare($sql);
+	    $reponse->bindvalue(':id_demandeur',$donnees['nigend_demandeur'],PDO::PARAM_STR);
+	    $reponse->execute();
+	    $donnees2=$reponse->fetch();
+	    $mail_demandeur = $donnees2['user_mail'];
+	    $mail_unite_demandeur = $donnees2['service_mail'];
+	}else{
+    	//récupération du mail du demandeur
+    	$info_user=ldap_info_user($donnees['nigend_demandeur']);
+    	if (isset($info_user[0]['mail'][0]))
+		  $mail_demandeur=$info_user[0]['mail'][0];
+    	//récupération du mail unité de rattachement du demandeur
+    	if (isset($info_user[0]['codeuniteservice'][0]))
+    		$info_cu_demandeur=ldap_info_cu($info_user[0]['codeuniteservice'][0]);
+    	if (isset($info_cu_demandeur[0]['mail'][0]))
+    		$mail_unite_demandeur = $info_cu_demandeur[0]['mail'][0];	
+    }
 	$lbl_ressource = $donnees['nom'];
 	$text_mail = "<br>Réservation : <b>".$donnees['nom']."</b>";
 	$text_mail .= "<br>Dates : <b>".date_to_php($donnees['date_debut'])." ".$donnees['heure_debut']." => ".date_to_php($donnees['date_fin'])." ".$donnees['heure_fin']."</b>";
