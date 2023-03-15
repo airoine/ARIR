@@ -12,3 +12,5 @@ Elle peut fonctionner avec des comptes locaux (gérés dans l’application), ma
 Le code source peut être mutualisé sur un même serveur pour plusieurs instances (un seul code avec plusieurs bases de données pour que plusieurs instance de l’application soit disponible pour différentes utilisations)
 
 Elle a été développée pour un ministère et est utilisée un peu partout en France. Afin que le travail effectué en interne soit valorisé, il a été décidé de la rendre disponible sur GIT avec une licence open-source MIT.
+
+La documentation d'installation est présente dans le code source de l'application (ARIR_INSTALLATION_WEB.odt)
