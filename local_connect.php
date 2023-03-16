@@ -39,9 +39,11 @@ if (isset($_POST['submit_form']) && $_POST['submit_form'] != ''){
 					$msg="Connexion effectuée";
 					$type_msg=0;
 					profil_application();
+					log_action('Connexion '.$_POST['LOGIN'].' via Ldap');
 				}else{
 					$msg="Mauvais LOGIN/PASSWORD";
 					$type_msg=1;
+					log_action('Echec de Connexion '.$_POST['LOGIN'].' Ldap');
 					sleep(5);
 				}		
 			}elseif (AUTH == "LOCAL"){
@@ -61,9 +63,11 @@ if (isset($_POST['submit_form']) && $_POST['submit_form'] != ''){
 					$_SESSION[NAME]['displayname']=$_SESSION[NAME]['uid'];
 					$_SESSION[NAME]['departmentUID']=$_SESSION[NAME]['codeUnite'];
 					profil_application();
+					log_action('Connexion '.$_POST['LOGIN'].' locale');
 				}else{
 					$msg="Mauvais LOGIN/PASSWORD";
 					$type_msg=1;		
+					log_action('Echec de Connexion '.$_POST['LOGIN'].' locale');
 					sleep(5);
 				}		
 				
