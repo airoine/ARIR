@@ -2996,9 +2996,7 @@ function entete($refresh=0){
   /*  if (isset($_GET['option']) && !is_numeric($_GET['option']))
     	return false;*/
     //chargement de l'entete html et de toutes les librairies
-    if ($refresh > 0)
-    	$tit=NAME;
-    if (isset($_SESSION[NAME]) || $refresh > 0)
+    if ($refresh > 0 || defined('NAME'))
     	$tit=NAME;
     else
     	$tit="Installation";
