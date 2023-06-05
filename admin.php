@@ -19,6 +19,7 @@ if (isset($_GET['option'])){
 	redirection();
 }
 
+
 if (isset($_GET['option']) && isset($_POST['add']) && $_POST['add'] != '')
 	unset($_GET['option']);
 
