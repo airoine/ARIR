@@ -12,6 +12,7 @@
 session_start();
 //chargement des fonctions de l'application
 require_once('require/function.php');
+
 if (isset($_POST['dcnx']) && $_POST['dcnx'] == "dcnx"){
 	unset($_POST);
 	$_SESSION = array();
